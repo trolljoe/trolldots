@@ -5,10 +5,12 @@
     "spacing": 4,
     "modules-left": [
         "custom/launcher",
+        "custom/workspaces",
         "wlr/taskbar"
     ],
     "modules-center": [
-        "clock"
+        "clock",
+        "custom/window"
     ],
     "modules-right": [
         "cpu",
@@ -21,6 +23,17 @@
         "format": "   ",
         "on-click": "rofi -show drun",
         "tooltip": false
+    },
+    "custom/workspaces": {
+    	"exec": "$HOME/.config/waybar/modules/workspaces.fish \"$WAYBAR_OUTPUT_NAME\"",
+    	"format": "    {} "
+    },
+    "custom/window": {
+        "return-type": "json",
+        "max-length": 40,
+        "escape": true,
+        "exec": "$HOME/.config/waybar/modules/window.fish",
+        "format": "<i> {} </i>"
     },
     "wlr/taskbar": {
       "format": "{icon}",

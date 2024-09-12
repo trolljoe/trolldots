@@ -43,6 +43,18 @@ window#waybar.chromium {
     background-clip: padding-box, border-box;
     border: 3px solid transparent;
 }
+#custom-workspaces {
+    padding: 0 10px;
+    margin-left: 5px;
+    color: #f0f0f0;
+    border-radius: 99px;
+    background: 
+        linear-gradient(rgba(40, 40, 40, 1), rgba(40, 40, 40, 1)) padding-box,
+        linear-gradient(90deg, #8ec07c, #d5c4a1) border-box;
+    background-clip: padding-box, border-box;
+    border: 3px solid transparent;
+}
+
 
 button {
     box-shadow: none;
@@ -130,6 +142,7 @@ button:hover {
 #tray,
 #mode,
 #idle_inhibitor,
+#custom-window,
 #scratchpad,
 #power-profiles-daemon {
     margin-top: 2px;

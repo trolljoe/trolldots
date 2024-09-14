@@ -12,6 +12,7 @@ spawn-at-startup "swww-daemon"
 spawn-at-startup "sww" "img" "$HOME/Downloads/wp9246943-plant-4k-wallpapers.jpg"
 spawn-at-startup "waybar"
 spawn-at-startup "~/.config/autostart/pipewire.sh"
+spawn-at-startup "~/.config/niri/xdg-desktop-portal.fish"
 
 input {
     keyboard {
@@ -20,7 +21,7 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "us"
+            layout "br"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
     }
@@ -258,6 +259,37 @@ cursor {
   xcursor-theme "Adwaita"
   xcursor-size 16
 }
+
+animations {
+	window-close {
+	 duration-ms 350
+     curve "linear"
+     custom-shader r"
+
+      vec4 rotate_and_fall_with_physics(vec3 coords_geo, vec3 size_geo) {
+      float progress = niri_clamped_progress;
+      vec2 coords = (coords_geo.xy - vec2(0.5, 0.5)) * size_geo.xy;
+      float fall_speed = progress * -1500.0;
+      coords.y += progress * fall_speed;
+      float exaggerated_rotation = (niri_random_seed - 0.5) * 3.14159 * 2.0;
+      float angle = progress * exaggerated_rotation * (1.0 + progress * 3.0);
+      mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+      coords = rotate * coords;
+      coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 0.5), 1.0);
+      vec3 coords_tex = niri_geo_to_tex * coords_geo;
+      vec4 color = texture2D(niri_tex, coords_tex.st);
+      return color;
+   }
+
+   vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+      return rotate_and_fall_with_physics(coords_geo, size_geo);
+   }
+
+    "
+	}
+}
+
+	
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name

@@ -1,16 +1,16 @@
 // -*- mode: jsonc -*-
 {
     "layer": "top",
-    "height": 30,
+    "height": 42,
     "spacing": 4,
     "modules-left": [
         "custom/launcher",
-        "custom/workspaces",
+        "niri/workspaces",
         "wlr/taskbar"
     ],
     "modules-center": [
         "clock",
-        "custom/window"
+        "niri/window"
     ],
     "modules-right": [
         "cpu",
@@ -24,9 +24,17 @@
         "on-click": "rofi -show drun",
         "tooltip": false
     },
-    "custom/workspaces": {
-    	"exec": "$HOME/.config/waybar/modules/workspaces.fish \"$WAYBAR_OUTPUT_NAME\"",
-    	"format": "    {} "
+    "niri/workspaces": {
+		"all-outputs": true,
+		"warp-on-scroll": false,
+		"format": "{name} {icon}",
+		"disable-tooltip": true,
+		"disable-markup": true,
+		"format": " {} ",
+		"format-icons": {
+			"active": "󰪥",
+			"default": "󰄰",
+		}
     },
     "custom/window": {
         "return-type": "json",
